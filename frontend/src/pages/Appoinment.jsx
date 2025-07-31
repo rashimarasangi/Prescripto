@@ -18,7 +18,7 @@ const Appoinment = () => {
   const [slotTime ,setSlotTime] = useState('')
 
   const fetchDocInfo = async () => {
-    const docInfo = doctors.find(doc => doc.id === docId)
+    const docInfo = doctors.find(doc => doc._id === docId)
     setDocInfo(docInfo)
     
 
@@ -36,13 +36,13 @@ const Appoinment = () => {
     currentDate.setDate(today.getDate()+i)
 
     //setting end time of the date with index
-    let endTime = new Date(today)
+    let endTime = new Date()
     endTime.setDate(today.getDate()+i)
     endTime.setHours(21, 0, 0, 0)
 
     //settting hours
     if (today.getDate () === currentDate.getDate()){
-      currentDate.setHours(currentDate.getHours() > 10? currentDate.getHours() + 1 : 10)
+      currentDate.setHours(currentDate.getHours() > 10 ? currentDate.getHours() + 1 : 10)
       currentDate.setMinutes(currentDate.getMinutes() > 30? 30 :0)
     } else {
       currentDate.setHours(10)
@@ -115,15 +115,15 @@ fetchDocInfo()
 
       {/*-----slots-----*/}
       <div className='sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700'>
-        <p>Booking slots
-        </p>
+        <p>Booking slots</p>
         <div>
           {
-            docSlots.length && docSlots.map((item,index)=>(
+            docSlots.length  && docSlots.map((item, index) => (
               <div key={index}>
                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
                 <p>{item[0] && item[0].datetime.getDate()}</p>
-                </div>
+                
+              </div>
             ))
           }
         </div>
